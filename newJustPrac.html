@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <link rel="stylesheet" href="draft.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-alt"></i> Professional Resume Builder</h1>
+            <p class="tagline">Create a polished resume in minutes - Download as PDF when done</p>
+        </header>
+        
+        <div class="builder-container">
+            <section class="form-section">
+                <h2>Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Toki Asan">
+                </div>
+                
+                <div class="form-group">
+                    <label for="jobTitle">Professional Title</label>
+                    <input type="text" id="jobTitle" placeholder="Software Engineer">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="toki.asan@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" placeholder="(123) 456-7890">
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Eau Claire, WI">
+                </div>
+                
+                <div class="form-group">
+                    <label for="summary">Professional Summary</label>
+                    <textarea id="summary" rows="4" placeholder="Experienced software engineer with 5+ years in web development..."></textarea>
+                </div>
+                
+                <h2>Work Experience</h2>
+                
+                <div id="experience-container">
+                    <div class="form-group experience-item">
+                        <label>Job Title</label>
+                        <input type="text" class="exp-title" placeholder="Senior Developer">
+                        
+                        <label>Company</label>
+                        <input type="text" class="exp-company" placeholder="Tech Solutions Inc.">
+                        
+                        <label>Duration</label>
+                        <input type="text" class="exp-duration" placeholder="Jan 2020 - Present">
+                        
+                        <label>Description</label>
+                        <textarea class="exp-description" rows="3" placeholder="Developed web applications using React and Node.js..."></textarea>
+                    </div>
+                </div>
+                
+                <button id="add-experience" class="add-btn"><i class="fas fa-plus"></i> Add Another Experience</button>
+                
+                <h2>Education</h2>
+                
+                <div id="education-container">
+                    <div class="form-group education-item">
+                        <label>Degree</label>
+                        <input type="text" class="edu-degree" placeholder="Bachelor of Science in Computer Science">
+                        
+                        <label>Institution</label>
+                        <input type="text" class="edu-institution" placeholder="University of Wisconsin Eau Claire">
+                        
+                        <label>Duration</label>
+                        <input type="text" class="edu-duration" placeholder="2014 - 2018">
+                    </div>
+                </div>
+                
+                <button id="add-education" class="add-btn"><i class="fas fa-plus"></i> Add Another Education</button>
+                
+                <h2>Skills</h2>
+                
+                <div class="form-group">
+                    <label for="skills">Skills (comma separated)</label>
+                    <input type="text" id="skills" placeholder="JavaScript, React, Node.js, CSS">
+                </div>
+                
+                <button id="export-pdf" class="export-btn"><i class="fas fa-download"></i> Export as PDF</button>
+                
+                <div class="instructions">
+                    <p><strong>Tip:</strong> Fill out all sections, then click "Export as PDF" to download your resume. You can print the PDF or share it digitally.</p>
+                </div>
+            </section>
+            
+            <section class="preview-section">
+                <h2>Resume Preview</h2>
+                
+                <div class="resume" id="resume-preview">
+                    <div class="resume-header">
+                        <h3 id="preview-name">Toki Asan</h3>
+                        <p id="preview-title">Software Engineer</p>
+                        <p id="preview-contact">toki.asan@example.com | (123) 456-7890 | Eau Claire, WI</p>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Professional Summary</h4>
+                        <p id="preview-summary">Experienced software engineer with 5+ years in web development...</p>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Work Experience</h4>
+                        <div id="preview-experience">
+                            <div class="experience-item">
+                                <div class="item-header">Senior Developer</div>
+                                <div class="item-subheader">
+                                    <span>Tech Solutions Inc.</span>
+                                    <span>Jan 2020 - Present</span>
+                                </div>
+                                <p>Developed web applications using React and Node.js...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Education</h4>
+                        <div id="preview-education">
+                            <div class="education-item">
+                                <div class="item-header">Bachelor of Science in Computer Science</div>
+                                <div class="item-subheader">
+                                    <span>University of Technology</span>
+                                    <span>2014 - 2018</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <h4>Skills</h4>
+                        <div class="skills" id="preview-skills">
+                            <span class="skill">JavaScript</span>
+                            <span class="skill">React</span>
+                            <span class="skill">Node.js</span>
+                            <span class="skill">CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all input elements
+            const fullNameInput = document.getElementById('fullName');
+            const jobTitleInput = document.getElementById('jobTitle');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const locationInput = document.getElementById('location');
+            const summaryInput = document.getElementById('summary');
+            const skillsInput = document.getElementById('skills');
+            
+            // Get all preview elements
+            const previewName = document.getElementById('preview-name');
+            const previewTitle = document.getElementById('preview-title');
+            const previewContact = document.getElementById('preview-contact');
+            const previewSummary = document.getElementById('preview-summary');
+            const previewExperience = document.getElementById('preview-experience');
+            const previewEducation = document.getElementById('preview-education');
+            const previewSkills = document.getElementById('preview-skills');
+            
+            // Add event listeners to update preview in real time
+            fullNameInput.addEventListener('input', updatePersonalInfo);
+            jobTitleInput.addEventListener('input', updatePersonalInfo);
+            emailInput.addEventListener('input', updatePersonalInfo);
+            phoneInput.addEventListener('input', updatePersonalInfo);
+            locationInput.addEventListener('input', updatePersonalInfo);
+            summaryInput.addEventListener('input', updateSummary);
+            skillsInput.addEventListener('input', updateSkills);
+            
+            // Add experience and education event listeners
+            document.getElementById('add-experience').addEventListener('click', addExperience);
+            document.getElementById('add-education').addEventListener('click', addEducation);
+            
+            // Set up event delegation for dynamic inputs
+            document.getElementById('experience-container').addEventListener('input', updateExperience);
+            document.getElementById('education-container').addEventListener('input', updateEducation);
+            
+            // Export button event listener
+            document.getElementById('export-pdf').addEventListener('click', exportPDF);
+            
+            // Function to update personal information in preview
+            function updatePersonalInfo() {
+                previewName.textContent = fullNameInput.value || 'Toki Asan';
+                previewTitle.textContent = jobTitleInput.value || 'Software Engineer';
+                
+                const contactParts = [];
+                if (emailInput.value) contactParts.push(emailInput.value);
+                if (phoneInput.value) contactParts.push(phoneInput.value);
+                if (locationInput.value) contactParts.push(locationInput.value);
+                
+                previewContact.textContent = contactParts.join(' | ') || 'toki.asan@example.com | (123) 456-7890 | Eau Claire, WI';
+            }
+            
+            // Function to update summary in preview
+            function updateSummary() {
+                previewSummary.textContent = summaryInput.value || 'Experienced software engineer with 5+ years in web development...';
+            }
+            
+            // Function to update skills in preview
+            function updateSkills() {
+                const skills = skillsInput.value.split(',').map(skill => skill.trim()).filter(skill => skill);
+                
+                if (skills.length === 0) {
+                    skills.push('JavaScript', 'React', 'Node.js', 'CSS');
+                }
+                
+                previewSkills.innerHTML = skills.map(skill => `<span class="skill">${skill}</span>`).join('');
+            }
+            
+            // Function to add new experience field
+            function addExperience() {
+                const container = document.getElementById('experience-container');
+                const newExperience = document.createElement('div');
+                newExperience.className = 'form-group experience-item';
+                newExperience.innerHTML = `
+                    <button class="delete-btn" onclick="this.parentElement.remove(); updateExperience();"><i class="fas fa-trash"></i></button>
+                    <label>Job Title</label>
+                    <input type="text" class="exp-title" placeholder="Senior Developer">
+                    <label>Company</label>
+                    <input type="text" class="exp-company" placeholder="Tech Solutions Inc.">
+                    <label>Duration</label>
+                    <input type="text" class="exp-duration" placeholder="Jan 2020 - Present">
+                    <label>Description</label>
+                    <textarea class="exp-description" rows="3" placeholder="Developed web applications using React and Node.js..."></textarea>
+                `;
+                container.appendChild(newExperience);
+                
+                // Add event listeners to the new inputs
+                const inputs = newExperience.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    input.addEventListener('input', updateExperience);
+                });
+            }
+            
+            // Function to add new education field
+            function addEducation() {
+                const container = document.getElementById('education-container');
+                const newEducation = document.createElement('div');
+                newEducation.className = 'form-group education-item';
+                newEducation.innerHTML = `
+                    <button class="delete-btn" onclick="this.parentElement.remove(); updateEducation();"><i class="fas fa-trash"></i></button>
+                    <label>Degree</label>
+                    <input type="text" class="edu-degree" placeholder="Bachelor of Science in Computer Science">
+                    <label>Institution</label>
+                    <input type="text" class="edu-institution" placeholder="University of Technology">
+                    <label>Duration</label>
+                    <input type="text" class="edu-duration" placeholder="2014 - 2018">
+                `;
+                container.appendChild(newEducation);
+                
+                // Add event listeners to the new inputs
+                const inputs = newEducation.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.addEventListener('input', updateEducation);
+                });
+            }
+            
+            // Function to update experience in preview
+            function updateExperience() {
+                const experienceItems = document.querySelectorAll('.experience-item');
+                let experienceHTML = '';
+                
+                experienceItems.forEach(item => {
+                    const title = item.querySelector('.exp-title').value || 'Senior Developer';
+                    const company = item.querySelector('.exp-company').value || 'Tech Solutions Inc.';
+                    const duration = item.querySelector('.exp-duration').value || 'Jan 2020 - Present';
+                    const description = item.querySelector('.exp-description').value || 'Developed web applications using React and Node.js...';
+                    
+                    experienceHTML += `
+                        <div class="experience-item">
+                            <div class="item-header">${title}</div>
+                            <div class="item-subheader">
+                                <span>${company}</span>
+                                <span>${duration}</span>
+                            </div>
+                            <p>${description}</p>
+                        </div>
+                    `;
+                });
+                
+                previewExperience.innerHTML = experienceHTML || `
+                    <div class="experience-item">
+                        <div class="item-header">Senior Developer</div>
+                        <div class="item-subheader">
+                            <span>Tech Solutions Inc.</span>
+                            <span>Jan 2020 - Present</span>
+                        </div>
+                        <p>Developed web applications using React and Node.js...</p>
+                    </div>
+                `;
+            }
+            
+            // Function to update education in preview
+            function updateEducation() {
+                const educationItems = document.querySelectorAll('.education-item');
+                let educationHTML = '';
+                
+                educationItems.forEach(item => {
+                    const degree = item.querySelector('.edu-degree').value || 'Bachelor of Science in Computer Science';
+                    const institution = item.querySelector('.edu-institution').value || 'University of Technology';
+                    const duration = item.querySelector('.edu-duration').value || '2014 - 2018';
+                    
+                    educationHTML += `
+                        <div class="education-item">
+                            <div class="item-header">${degree}</div>
+                            <div class="item-subheader">
+                                <span>${institution}</span>
+                                <span>${duration}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                previewEducation.innerHTML = educationHTML || `
+                    <div class="education-item">
+                        <div class="item-header">Bachelor of Science in Computer Science</div>
+                        <div class="item-subheader">
+                            <span>University of Technology</span>
+                            <span>2014 - 2018</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Function to export as PDF (simulated)
+            function exportPDF() {
+                alert('I have no idea what to implement further');
+               
+            }
+            
+            // Initialize the preview with default values
+            updatePersonalInfo();
+            updateSummary();
+            updateSkills();
+            updateExperience();
+            updateEducation();
+        });
+    </script>
+</body>
+</html>
